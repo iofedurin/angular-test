@@ -1,0 +1,10 @@
+export enum PLATFORM {
+  PC = 'PC',
+  XBOX = 'XBOX',
+  PLAYSTATION = 'PLAYSTATION',
+  NINTENDO_SWITCH = 'NINTENDO SWITCH',
+  IOS = 'IOS',
+  ANDROID = 'ANDROID',
+}
+
+export const PLATFORMS = Object.values(PLATFORM);

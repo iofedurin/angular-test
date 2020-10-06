@@ -1,0 +1,30 @@
+.fields {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 10px;
+
+  .field {
+    flex: 0 calc(50% - 5px);
+  }
+}
+
+.players-list {
+  padding-bottom: 10px;
+  .player {
+    background: chocolate;
+    margin-right: 3px;
+    border-radius: 10px;
+    color: white;
+    padding: 5px 0;
+
+    $padding: 10px;
+    .text {
+      padding-left: $padding;
+    }
+    .close {
+      padding-left: 5px;
+      padding-right: $padding;
+      cursor: pointer;
+    }
+  }
+}

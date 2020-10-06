@@ -1,0 +1,82 @@
+{
+  "players": [
+    {
+      "nickname": "Barclays",
+      "age": "27",
+      "phone": "88005555353",
+      "email": "pro@she.pozvonit",
+      "platform": "PC",
+      "id": 2
+    },
+    {
+      "nickname": "Ivan",
+      "age": "25",
+      "phone": "89223434778",
+      "email": "iofedurin@gmail.com",
+      "platform": "PC",
+      "id": 3
+    },
+    {
+      "nickname": "Lillia",
+      "age": "14",
+      "phone": "88005553535",
+      "email": "lillia@gmail.com",
+      "platform": "ANDROID",
+      "id": 4
+    },
+    {
+      "nickname": "Novak",
+      "age": "24",
+      "phone": "88005553536",
+      "email": "novak@gmail.com",
+      "platform": "PLAYSTATION",
+      "id": 5
+    }
+  ],
+  "games": [
+    {
+      "name": "WOW",
+      "genre": "MMORPG",
+      "releaseDate": "2005-01-01T19:00:00.000Z",
+      "platform": "PC",
+      "developer": "Blizzard",
+      "esrbRating": 10,
+      "id": 1
+    },
+    {
+      "name": "League of legends",
+      "genre": "MOBA",
+      "releaseDate": "2009-10-27T19:00:00.000Z",
+      "platform": "PC",
+      "developer": "Riot Games",
+      "esrbRating": 13,
+      "id": 2
+    },
+    {
+      "name": "Fifa 2021",
+      "genre": "SIMULATOR",
+      "releaseDate": "2020-12-31T19:00:00.000Z",
+      "platform": "PLAYSTATION",
+      "developer": "EA Sports",
+      "esrbRating": 10,
+      "id": 3
+    }
+  ],
+  "manyToMany": [
+    {
+      "playerId": 3,
+      "gameId": 2,
+      "id": 1
+    },
+    {
+      "playerId": 2,
+      "gameId": 1,
+      "id": 2
+    },
+    {
+      "playerId": 3,
+      "gameId": 1,
+      "id": 3
+    }
+  ]
+}

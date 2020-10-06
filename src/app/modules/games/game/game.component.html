@@ -1,0 +1,88 @@
+<div class="game-wrap">
+  <h2 mat-dialog-title>{{ gameForm.id ? 'Update' : 'Create' }} game</h2>
+  <mat-dialog-content>
+    <div class="fields">
+      <mat-form-field class="field name">
+        <mat-label>Name</mat-label>
+        <input matInput [formControl]="gameForm.name">
+        <mat-error *ngIf="gameForm.name.errors?.required">
+          Name is required.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="field genre">
+        <mat-label>Genre</mat-label>
+        <mat-select [formControl]="gameForm.genre">
+          <mat-option *ngFor="let genre of genres" [value]="genre"> {{ genre }} </mat-option>
+        </mat-select>
+        <mat-error *ngIf="gameForm.genre.errors?.required">
+          Genre is required.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="field release-date">
+        <mat-label>Release date</mat-label>
+        <input matInput [formControl]="gameForm.releaseDate" [matDatepicker]="picker">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="gameForm.releaseDate.errors?.required">
+          Date is required.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="field platform">
+        <mat-label>Platform</mat-label>
+        <mat-select [formControl]="gameForm.platform">
+          <mat-option *ngFor="let platform of platforms" [value]="platform"> {{ platform }} </mat-option>
+        </mat-select>
+        <mat-error *ngIf="gameForm.platform.errors?.required">
+          Platform required.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="field developer">
+        <mat-label>Developer</mat-label>
+        <input matInput [formControl]="gameForm.developer">
+        <mat-error *ngIf="gameForm.genre.errors?.required">
+          Developer is required.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="field esrb-rating">
+        <mat-label>ESRB Rating</mat-label>
+        <mat-select [formControl]="gameForm.esrbRating">
+          <mat-option *ngFor="let rating of esrbRatings" [value]="rating.minAge"> {{ rating.name }} </mat-option>
+        </mat-select>
+        <mat-error *ngIf="gameForm.esrbRating.errors?.required">
+          ESRB Rating required.
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="players">
+      <h3><strong>Players:</strong></h3>
+      <div *ngIf="notReleased()">Game isn't released yet</div>
+      <mat-form-field *ngIf="!notReleased()">
+        <mat-label>Select player</mat-label>
+        <input type="text" matInput [formControl]="playerSearchControl" [matAutocomplete]="auto">
+        <mat-autocomplete (optionSelected)="onPlayerSelect($event)" #auto="matAutocomplete" [displayWith]="displayFn">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{ option.nickname }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <div class="players-list">
+        <span class="player" *ngFor="let player of gamePlayers; let i = index">
+          <span class="text">{{ displayFn(player) }}</span>
+          <span class="close" (click)="deletePlayer(i, player)">&#10005;</span>
+        </span>
+      </div>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button [disabled]="gameForm.invalid" (click)="save()">Save</button>
+  </mat-dialog-actions>
+</div>

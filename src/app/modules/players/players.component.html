@@ -1,0 +1,60 @@
+<div class="players-wrap">
+  <button mat-icon-button mat-flat-button color="primary" (click)="openPlayersDialog()">
+    <mat-icon>add</mat-icon>
+  </button>
+
+  <div class="table-container">
+    <table mat-table [dataSource]="dataSource">
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let player"> {{ player.id }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="nickname">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-form-field class="filter" floatLabel="never">
+            <mat-label>Nickname</mat-label>
+            <input matInput [formControl]="nicknameFilter">
+          </mat-form-field>
+        </th>
+        <td mat-cell *matCellDef="let player"> {{ player.nickname }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="age">
+        <th mat-header-cell *matHeaderCellDef> Age </th>
+        <td mat-cell *matCellDef="let player"> {{ player.age }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="phone">
+        <th mat-header-cell *matHeaderCellDef> Phone </th>
+        <td mat-cell *matCellDef="let player"> {{ player.phone }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef> Email </th>
+        <td mat-cell *matCellDef="let player"> {{ player.email }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="platform">
+        <th mat-header-cell *matHeaderCellDef> Platform </th>
+        <td mat-cell *matCellDef="let player"> {{ player.platform }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let player">
+          <button mat-icon-button (click)="openPlayersDialog(player)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button (click)="openDeleteDialog(player)">
+            <mat-icon>delete_forever</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+</div>

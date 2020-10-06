@@ -1,0 +1,98 @@
+<div class="player-wrap">
+  <h2 mat-dialog-title>{{ playerForm.id ? 'Update' : 'Create' }} player</h2>
+  <mat-dialog-content>
+    <div class="fields">
+      <mat-form-field class="field nickname">
+        <mat-label>Nickname</mat-label>
+        <input matInput [formControl]="playerForm.nickname">
+        <mat-error *ngIf="playerForm.nickname.errors?.pattern">
+          Name is must contain only A-z0-9_.
+        </mat-error>
+        <mat-error *ngIf="playerForm.nickname.errors?.duplicate">
+          Nickname already taken.
+        </mat-error>
+        <mat-error *ngIf="playerForm.nickname.errors?.required">
+          Nickname is required.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="field age">
+        <mat-label>Age</mat-label>
+        <input matInput [formControl]="playerForm.age">
+        <mat-error *ngIf="playerForm.age.errors?.min || playerForm.age.errors?.max">
+          Must be a value in range 0 - 99.
+        </mat-error>
+        <mat-error *ngIf="playerForm.age.errors?.pattern">
+          Must be a number.
+        </mat-error>
+        <mat-error *ngIf="playerForm.age.errors?.required">
+          Age is required.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="field phone">
+        <mat-label>Phone</mat-label>
+        <input matInput [formControl]="playerForm.phone">
+        <mat-error *ngIf="playerForm.phone.errors?.pattern">
+          Phone must be in russian format.
+        </mat-error>
+        <mat-error *ngIf="playerForm.phone.errors?.duplicate">
+          Phone already taken.
+        </mat-error>
+        <mat-error *ngIf="playerForm.phone.errors?.required">
+          Phone is required.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="field email">
+        <mat-label>Email</mat-label>
+        <input matInput [formControl]="playerForm.email">
+        <mat-error *ngIf="playerForm.email.errors?.email">
+          Must be a valid email.
+        </mat-error>
+        <mat-error *ngIf="playerForm.email.errors?.required">
+          Email required.
+        </mat-error>
+        <mat-error *ngIf="playerForm.email.errors?.duplicate">
+          Email already taken.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="field platform">
+        <mat-label>Platform</mat-label>
+        <mat-select [formControl]="playerForm.platform">
+          <mat-option *ngFor="let platform of platforms" [value]="platform"> {{ platform }} </mat-option>
+        </mat-select>
+        <mat-error *ngIf="playerForm.platform.errors?.required">
+          Platform required.
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="games">
+      <h3><strong>Games:</strong></h3>
+      <mat-form-field>
+        <mat-label>Select game</mat-label>
+        <input type="text" matInput [formControl]="gameSearchControl" [matAutocomplete]="auto">
+        <mat-autocomplete (optionSelected)="onGameSelect($event)" #auto="matAutocomplete" [displayWith]="displayFn">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option.name}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <div class="games-list">
+        <span class="game" *ngFor="let game of playerGames; let i = index">
+          <span class="text">{{ displayFn(game) }}</span>
+          <span class="close" (click)="deleteGame(i, game)">&#10005;</span>
+        </span>
+      </div>
+    </div>
+
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button [disabled]="playerForm.invalid" (click)="save()">Save</button>
+  </mat-dialog-actions>
+</div>
