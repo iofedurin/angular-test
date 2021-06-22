@@ -3,6 +3,8 @@ Angular Test Project application. Created with Angular Material components.
 
 Test automerge
 
+DASDKa;lsdk;alskd;laskd;
+
 
 ### Installation
 1. Copy repository and install dependencies with `npm i`
